@@ -1,6 +1,7 @@
 // BACKEND LOGIC
-var romanNumerals = ["I", "V", "X", "L", "C", "D", "M"];
-var numbers = [1, 5, 10, 50, 100, 500, 1000];
+
+// var romanNumerals = ["I", "V", "X", "L", "C", "D", "M"];
+// var numbers = [1, 5, 10, 50, 100, 500, 1000];
 
 // function romanTranslator(userNumber) {
 //   var output = "";
@@ -14,24 +15,9 @@ var numbers = [1, 5, 10, 50, 100, 500, 1000];
 //   return output;
 // };
 
-// function modular(userNumber) {
-//   var output = "";
-//   romanNumerals.forEach(function(romanNumeral, i) {
-//     if userNumber > romanNumeral[6] {
-//       return userNumber % rN
-//     }
-//   })
-// }
+function translate(userNumber) {
 
-function math(userNumber) {
-
-
-
-  var answer =[];
-
-  if (userNumber > 3999) {
-    alert("Halt! Everyone knows Romans don't count past 3,999. Please enter a number less than 3,999.");
-  }
+  var answer = [];
 
   if (userNumber >= 1000) {
     var remainder1000 = 0;
@@ -105,7 +91,6 @@ function math(userNumber) {
         for (i=divisibleBy; i > 0; i-=1) {
           answer.push("V");
         }
-        console.log(remainder5);
       }
       else {
         remainder5 = remainder10;
@@ -119,83 +104,13 @@ function math(userNumber) {
          for (i=divisibleBy; i > 0; i-=1) {
            answer.push("I");
          }
-         console.log(remainder1);
        }
        else {
          remainder1 = remainder5;
        }
 
-
-  return answer.toString();
+  return answer.join("");
 }
-
-// function math(userNumber) {
-//
-//   var remainderValue = 0;
-//   var answer =[];
-//   if (userNumber > 3999) {
-//     alert("Halt! Everyone knows Romans don't count past 3,999. Please enter a number less than 3,999.");
-//   } else if (userNumber >= 1000) {
-//     // Call function?
-//     var divisibleBy = 0;
-//     divisibleBy += Math.floor(userNumber / 1000);
-//     // console.log(divisibleBy);
-//     remainderValue += userNumber % 1000;
-//     // console.log(remainderValue);
-//       for (i=divisibleBy; i > 0; i-=1) {
-//         answer.push("M");
-//       }
-//   } else  if (remainderValue >= 500) {
-//     // Call function?
-//     var divisibleBy = 0;
-//     divisibleBy += Math.floor(remainderValue / 500);
-//     console.log(divisibleBy);
-//     remainderValue += remainderValue % 500;
-//     console.log(remainderValue);
-//       for (i=divisibleBy; i > 0; i-=1) {
-//         answer.push("D");
-//       }
-//
-//   }
-//
-//
-//
-//   return answer.toString();
-// }
-
-
-
-
-// function romanTranslator(userNumber) {
-//   var output = "";
-//   numbers.forEach(function(number, i) {
-//     if (userNumber === number) {
-//       output += romanNumerals[i];
-//     } else {
-//       return "Nope";
-//     };
-//   });
-//   return output;
-// };
-
-// function romanTranslator(userNumber) {
-//   numbers.map(function(number, i) {
-//     if (userNumber === number) {
-//       return romanNumerals[i];
-//     } else {
-//       return "Nope";
-//     };
-//   });
-// };
-
-// function romanTranslator(number) {
-//   if (number === 1) {
-//     return romanNumerals[0];
-//   } else {
-//     return "Nope";
-//   }
-// };
-
 
 // FRONTEND LOGIC
 
@@ -205,12 +120,13 @@ $(document).ready(function() {
 
     var userNumber = parseInt($("input#userNumber").val());
 
-    math(userNumber);
+    if (userNumber > 3999) {
+      alert("Halt! Everyone knows Romans don't count past 3,999. Please enter a number less than 3,999.");
+      return;
+    }
 
-    var output = math(userNumber);
-
+    var output = translate(userNumber);
     $("#numeralOutput").text(output);
 
   });
-
 });
